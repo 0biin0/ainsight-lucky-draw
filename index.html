@@ -482,6 +482,7 @@ header h1{font-weight:900;letter-spacing:0;font-size:clamp(24px,5.2vw,54px)}
 <button class="action" id="backup">진행 상태 백업</button>
 <button class="action secondary" id="restore">백업 불러오기</button>
 <input type="file" id="restoreFile" accept=".json,application/json" hidden>
+<button class="action secondary" id="undoDraw">마지막 추첨 취소</button>
 <button class="action secondary" id="undoReset">초기화 전 상태 복구</button><button class="action secondary" id="changePin">비밀번호 변경</button>
 <p id="adminStatus" role="status"></p>
 <button class="action" id="export">
@@ -566,7 +567,7 @@ header h1{font-weight:900;letter-spacing:0;font-size:clamp(24px,5.2vw,54px)}
   },{
     r:8,n:'키링',q:15
   }
-  ],$=id=>document.getElementById(id);let state,pending=null;function shuffle(a){
+  ],$=id=>document.getElementById(id);let state,pending=null,undoBusy=false;function shuffle(a){
     for(let i=a.length-1;i>0;i--){
       let j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]
     }
@@ -591,7 +592,7 @@ header h1{font-weight:900;letter-spacing:0;font-size:clamp(24px,5.2vw,54px)}
   if(!state)state=fresh();pending=state.pending??null;
   function render(){
     const used=new Map(state.records.map(x=>[x.i,x]));$('remaining').textContent=50-used.size;$('completed').textContent=used.size;$('board').replaceChildren();state.assignment.forEach((r,i)=>{
-      const b=document.createElement('button');b.className='tile';b.disabled=used.has(i);const p=prizes.find(p=>p.r===r);b.innerHTML=used.has(i)?r+'등<small>'+p.n+'</small>':String(i+1).padStart(2,'0')+'<small>OPEN</small>';if(!used.has(i))b.onclick=()=>pick(i);$('board').append(b)
+      const b=document.createElement('button');b.className='tile';b.disabled=used.has(i)||pending!==null;const p=prizes.find(p=>p.r===r);b.innerHTML=used.has(i)?r+'등<small>'+p.n+'</small>':String(i+1).padStart(2,'0')+'<small>OPEN</small>';if(!used.has(i))b.onclick=()=>pick(i);$('board').append(b)
     });$('history').replaceChildren();[...state.records].reverse().forEach(x=>{
       const tr=document.createElement('tr');const p=prizes.find(p=>p.r===x.r);[String(x.i+1).padStart(2,'0'),x.r+'등',p.n,new Date(x.t).toLocaleString('ko-KR')].forEach(v=>{
         const td=document.createElement('td');td.textContent=v;tr.append(td)
@@ -604,7 +605,7 @@ header h1{font-weight:900;letter-spacing:0;font-size:clamp(24px,5.2vw,54px)}
     }
   }
   function pick(i){
-    if(state.records.some(x=>x.i===i))return;const r=state.assignment[i],p=prizes.find(p=>p.r===r);state.records.push({
+    if(pending!==null||undoBusy||!$('touchDialog').hidden||state.records.some(x=>x.i===i))return;const r=state.assignment[i],p=prizes.find(p=>p.r===r);state.records.push({
       i,r,t:new Date().toISOString()
     });pending=i;save();render();$('rank').textContent=r+'등 당첨!';$('gift').textContent=p.n;$('number').textContent='선택 번호 '+String(i+1).padStart(2,'0');$('winnerModal').classList.toggle('top-prize',r<=3);$('overlay').hidden=false;confetti(r<=3);window.luckyAudio.playWinner(r)
   }
@@ -651,6 +652,20 @@ header h1{font-weight:900;letter-spacing:0;font-size:clamp(24px,5.2vw,54px)}
     if(!await touchAsk('전체 초기화','현재 '+state.records.length+'명의 당첨 기록을 지우고 새 추첨을 시작합니다.\n다음 날 이어서 진행하려면 취소하세요.\n기존 상태는 관리자 메뉴에서 초기화 전 상태로 복구할 수 있습니다.','confirm'))return;
     try{localStorage.setItem(KEY+'-before-reset',JSON.stringify(state));}catch(e){$('adminStatus').textContent='초기화 전 상태를 저장하지 못해 초기화를 중단했습니다.';return;}
     window.luckyAudio.stopWinner();state=fresh();pending=null;damaged=false;$('overlay').hidden=true;$('confetti').replaceChildren();save();render();$('adminStatus').textContent='새 추첨을 시작했습니다. 초기화 전 상태 복구가 가능합니다.';
+  };
+  $('undoDraw').onclick=async()=>{
+    if(!isAdmin()||undoBusy)return;
+    const last=state.records[state.records.length-1];
+    if(!last){$('adminStatus').textContent='취소할 추첨 기록이 없습니다.';return;}
+    undoBusy=true;
+    try{
+      const prize=prizes.find(p=>p.r===last.r);
+      if(!await touchAsk('마지막 추첨 취소','번호 '+String(last.i+1).padStart(2,'0')+' · '+last.r+'등 · '+prize.n+' 당첨을 취소할까요?\n이 번호와 경품 1개가 복구됩니다. 같은 번호를 다시 누르면 같은 경품이 나옵니다.','confirm'))return;
+      if(!isAdmin()||state.records[state.records.length-1]!==last){$('adminStatus').textContent='기록이 변경되었습니다. 다시 확인해 주세요.';return;}
+      try{localStorage.setItem(KEY+'-before-undo',JSON.stringify(state));}catch(e){$('adminStatus').textContent='취소 전 기록을 저장하지 못해 취소를 중단했습니다.';return;}
+      window.luckyAudio.stopWinner();state.records.pop();pending=null;$('overlay').hidden=true;$('confetti').replaceChildren();
+      const saved=save();render();$('adminStatus').textContent=saved?'번호 '+String(last.i+1).padStart(2,'0')+' 추첨을 취소하고 저장했습니다. 경품 1개가 복구되었습니다.':'추첨을 취소했지만 기기 저장에 실패했습니다. 진행 상태 백업을 저장해 주세요.';
+    }finally{undoBusy=false;}
   };
   $('undoReset').onclick=async()=>{if(!isAdmin())return;let old;try{old=JSON.parse(localStorage.getItem(KEY+'-before-reset'));}catch(e){}if(!safeValid(old)){$('adminStatus').textContent='복구할 초기화 전 기록이 없습니다.';return;}if(!await touchAsk('초기화 전 상태 복구',old.records.length+'명 당첨 상태로 되돌릴까요? 현재 진행 상태가 교체됩니다.','confirm'))return;window.luckyAudio.stopWinner();state=old;pending=null;damaged=false;$('overlay').hidden=true;save();render();$('adminStatus').textContent='초기화 전 상태를 복구했습니다.';};
 
