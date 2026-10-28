@@ -294,7 +294,7 @@ header h1{font-size:clamp(30px,4vw,52px);letter-spacing:2px;white-space:nowrap;m
 .modal .celebrate{line-height:0;animation:none}.winner-bear{width:clamp(160px,28vw,280px);height:clamp(95px,17vw,162px);object-fit:contain;filter:drop-shadow(0 6px 10px #2c64941a)}
 .modal .eyebrow{font-size:clamp(15px,2.5vw,23px);letter-spacing:3px}.modal h2{font-size:clamp(48px,10vw,106px)}
 .modal .gift{font-size:clamp(26px,4.5vw,48px)}.modal .muted{margin:8px 0;font-size:18px}.modal button{margin:5px;padding:14px 38px;min-height:54px;font-size:20px}
-@media(min-width:1400px){.wrap{max-width:1280px}.board{grid-template-columns:repeat(11,1fr)}.tile{min-height:84px;font-size:25px}}
+@media(min-width:1400px){.wrap{max-width:1280px}.board{grid-template-columns:repeat(10,1fr)}.tile{min-height:84px;font-size:25px}}
 @media(max-width:700px){.wrap{padding:12px}header{padding:24px 80px}header h1{font-size:clamp(23px,5vw,34px);letter-spacing:0}.hero-bear{width:85px;height:100px;bottom:12px}.hero-bear.left{left:2px}.hero-bear.right{right:2px}header>p{font-size:12px}.draw-guide{padding:10px;gap:10px}.draw-guide img{width:52px;height:56px}.draw-guide h2{font-size:14px}.draw-guide p{font-size:12px}.modal{padding:20px 12px;border-width:3px}.modal .eyebrow{letter-spacing:1px}}
 @media(max-height:650px){.winner-bear{height:90px}.modal{gap:4px;padding:16px}.modal h2{font-size:58px}.modal .gift{font-size:30px}.modal .muted{font-size:14px}.modal button{min-height:44px;padding:10px 28px}}
 @media(prefers-reduced-motion:reduce){.tile,.modal{transition:none;animation:none}}
@@ -309,7 +309,7 @@ header>p{line-height:1.6}
 .stats{flex:none;margin:0;padding:clamp(12px,1.5vh,24px)}.stats span{font-size:clamp(12px,1.8vw,19px)}.stats strong{font-size:clamp(25px,3.5vw,40px)}
 .draw-guide{flex:none;margin:0;padding:12px 20px}.draw-guide img{width:clamp(52px,8vw,86px);height:clamp(52px,8vw,86px)}
 .draw-guide h2{font-size:clamp(14px,2.2vw,23px)}.draw-guide p{font-size:clamp(12px,1.7vw,18px)}
-.board{flex:1;grid-template-columns:repeat(5,minmax(0,1fr));grid-template-rows:repeat(11,minmax(56px,1fr));gap:clamp(6px,1vw,12px);min-height:0}
+.board{flex:1;grid-template-columns:repeat(5,minmax(0,1fr));grid-template-rows:repeat(10,minmax(56px,1fr));gap:clamp(6px,1vw,12px);min-height:0}
 .tile{min-width:0;min-height:56px;padding:8px 3px;font-size:clamp(23px,4vw,42px);border-radius:clamp(10px,1.8vw,18px)}
 .tile small{font-size:clamp(10px,1.3vw,14px);line-height:1.25;letter-spacing:.8px}.tile:disabled small{word-break:keep-all;overflow-wrap:anywhere}
 .wrap>.controls{flex:none;margin:0;gap:12px}.wrap>.controls .action{min-height:48px;font-size:clamp(14px,1.8vw,20px);padding:12px 24px}
@@ -345,7 +345,7 @@ header h1{font-weight:900;letter-spacing:0;font-size:clamp(24px,5.2vw,54px)}
 .board { flex:none; grid-template-columns:repeat(5,minmax(0,1fr)); grid-template-rows:none; }
 .sound-controls { position:static; z-index:auto; }
 
-/* Desktop / landscape TV: all 55 tiles in 11 columns x 5 rows. */
+/* Desktop / landscape TV: all 50 tiles in 10 columns x 5 rows. */
 @media (min-width:900px) and (orientation:landscape) {
   .wrap, .wrap:has(.admin.visible) {
     max-width:1600px;
@@ -369,7 +369,7 @@ header h1{font-weight:900;letter-spacing:0;font-size:clamp(24px,5.2vw,54px)}
   .draw-guide p { font-size:clamp(11px,1.5vh,14px); }
   .board {
     flex:none;
-    grid-template-columns:repeat(11,minmax(0,1fr));
+    grid-template-columns:repeat(10,minmax(0,1fr));
     grid-template-rows:repeat(5,minmax(0,1fr));
     gap:clamp(4px,.65vh,8px);
     height:clamp(275px,45vh,520px);
@@ -424,7 +424,7 @@ header h1{font-weight:900;letter-spacing:0;font-size:clamp(24px,5.2vw,54px)}
      행운의 번호를 터치해 주세요
     </p>
     <p style="font-size:12px;color:#bedaf5">
-     55 PRIZES · EVERY DRAW WINS
+     50 PRIZES · EVERY DRAW WINS
     </p>
    </header>
    <section class="stats">
@@ -433,7 +433,7 @@ header h1{font-weight:900;letter-spacing:0;font-size:clamp(24px,5.2vw,54px)}
       전체 경품
      </span>
      <strong>
-      55
+      50
      </strong>
     </div>
     <div>
@@ -441,7 +441,7 @@ header h1{font-weight:900;letter-spacing:0;font-size:clamp(24px,5.2vw,54px)}
       남은 뽑기
      </span>
      <strong id="remaining">
-      55
+      50
      </strong>
     </div>
     <div>
@@ -546,10 +546,10 @@ header h1{font-weight:900;letter-spacing:0;font-size:clamp(24px,5.2vw,54px)}
 <div id="pinDisplay" aria-live="polite" aria-label="입력한 비밀번호 자릿수"></div>
 <div class="keypad" id="keypad"><button type="button" id="key0" class="action secondary">1</button><button type="button" id="key1" class="action secondary">2</button><button type="button" id="key2" class="action secondary">3</button><button type="button" id="key3" class="action secondary">4</button><button type="button" id="key4" class="action secondary">5</button><button type="button" id="key5" class="action secondary">6</button><button type="button" id="key6" class="action secondary">7</button><button type="button" id="key7" class="action secondary">8</button><button type="button" id="key8" class="action secondary">9</button><button type="button" id="key9" class="action secondary">지우기</button><button type="button" id="key10" class="action secondary">0</button><button type="button" id="key11" class="action secondary">←</button></div>
 <div class="touch-actions"><button type="button" class="action secondary" id="touchCancel">취소</button><button type="button" class="action" id="touchOK">확인</button></div></div></div>
-<script src="audio.js"></script>
+<script src="audio.js?v=4-random120"></script>
   <script>
    (()=>{
-  'use strict';const KEY='ainsight-lucky-55-event-v1',prizes=[{
+  'use strict';const KEY='ainsight-lucky-50-event-v1',prizes=[{
     r:1,n:'스타벅스 상품권',q:1
   },{
     r:2,n:'와인',q:2
@@ -564,7 +564,7 @@ header h1{font-weight:900;letter-spacing:0;font-size:clamp(24px,5.2vw,54px)}
   },{
     r:7,n:'안대',q:10
   },{
-    r:8,n:'키링',q:20
+    r:8,n:'키링',q:15
   }
   ],$=id=>document.getElementById(id);let state,pending=null;function shuffle(a){
     for(let i=a.length-1;i>0;i--){
@@ -578,7 +578,7 @@ header h1{font-weight:900;letter-spacing:0;font-size:clamp(24px,5.2vw,54px)}
     }
   }
   function valid(s){
-    return s&&Array.isArray(s.assignment)&&s.assignment.length===55&&Array.isArray(s.records)&&prizes.every(p=>s.assignment.filter(r=>r===p.r).length===p.q)&&new Set(s.records.map(x=>x.i)).size===s.records.length&&s.records.every(x=>Number.isInteger(x.i)&&x.i>=0&&x.i<55&&s.assignment[x.i]===x.r)
+    return s&&Array.isArray(s.assignment)&&s.assignment.length===50&&Array.isArray(s.records)&&prizes.every(p=>s.assignment.filter(r=>r===p.r).length===p.q)&&new Set(s.records.map(x=>x.i)).size===s.records.length&&s.records.every(x=>Number.isInteger(x.i)&&x.i>=0&&x.i<50&&s.assignment[x.i]===x.r)
   }
   function save(){
     state.pending=pending;state.savedAt=new Date().toISOString();
@@ -590,7 +590,7 @@ header h1{font-weight:900;letter-spacing:0;font-size:clamp(24px,5.2vw,54px)}
   for(const k of [KEY,KEY+'-backup']){try{const raw=localStorage.getItem(k);if(raw){const candidate=JSON.parse(raw);if(safeValid(candidate)){state=candidate;recovered=true;break;}damaged=true;}}catch(e){damaged=true;}}
   if(!state)state=fresh();pending=state.pending??null;
   function render(){
-    const used=new Map(state.records.map(x=>[x.i,x]));$('remaining').textContent=55-used.size;$('completed').textContent=used.size;$('board').replaceChildren();state.assignment.forEach((r,i)=>{
+    const used=new Map(state.records.map(x=>[x.i,x]));$('remaining').textContent=50-used.size;$('completed').textContent=used.size;$('board').replaceChildren();state.assignment.forEach((r,i)=>{
       const b=document.createElement('button');b.className='tile';b.disabled=used.has(i);const p=prizes.find(p=>p.r===r);b.innerHTML=used.has(i)?r+'등<small>'+p.n+'</small>':String(i+1).padStart(2,'0')+'<small>OPEN</small>';if(!used.has(i))b.onclick=()=>pick(i);$('board').append(b)
     });$('history').replaceChildren();[...state.records].reverse().forEach(x=>{
       const tr=document.createElement('tr');const p=prizes.find(p=>p.r===x.r);[String(x.i+1).padStart(2,'0'),x.r+'등',p.n,new Date(x.t).toLocaleString('ko-KR')].forEach(v=>{
@@ -612,7 +612,7 @@ header h1{font-weight:900;letter-spacing:0;font-size:clamp(24px,5.2vw,54px)}
     window.luckyAudio.stopWinner();
     pending=null;save();render();$('overlay').hidden=true;$('confetti').replaceChildren()
   }
-  const PINKEY=KEY+'-admin-pin';let adminPin='2468';try{const p=localStorage.getItem(PINKEY);if(/^\d{4}$/.test(p))adminPin=p;}catch(e){}
+  const PINKEY='ainsight-lucky-55-event-v1-admin-pin';let adminPin='2468';try{const p=localStorage.getItem(PINKEY);if(/^\d{4}$/.test(p))adminPin=p;}catch(e){}
   let dialogResolve=null,dialogMode='',digits='',returnFocus=null;
   function pinPaint(){$('pinDisplay').textContent='●'.repeat(digits.length)+'○'.repeat(4-digits.length);}
   function dismiss(value){$('touchDialog').hidden=true;const resolve=dialogResolve;dialogResolve=null;if(returnFocus&&returnFocus.focus)returnFocus.focus();if(resolve)resolve(value);}
