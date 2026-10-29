@@ -405,10 +405,52 @@ header h1{font-weight:900;letter-spacing:0;font-size:clamp(24px,5.2vw,54px)}
 
 #touchDialog{z-index:20}.touch-card{background:#fff;border-radius:24px;padding:24px;width:min(94vw,460px);max-height:calc(100dvh - 24px);overflow:auto;text-align:center;box-shadow:0 20px 70px #0005}.touch-card h2{margin:0 0 12px;font-size:24px}.touch-card p{line-height:1.6;white-space:pre-line}.keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.keypad[hidden]{display:none}.keypad button{min-height:62px;font-size:26px;touch-action:manipulation}#pinDisplay{font-size:32px;letter-spacing:12px;min-height:54px}.touch-actions{display:flex;gap:12px;margin-top:18px}.touch-actions button{flex:1;min-height:52px;font-size:18px}#adminStatus{width:100%;color:#174c7e}.touch-card button:focus-visible{outline:3px solid #f5b638;outline-offset:2px}
 </style>
- </head>
+ <style>/* Keep playback status available to assistive technology without displaying it. */ #audioStatus{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;clip-path:inset(50%)!important;white-space:nowrap!important;border:0!important}</style><style>
+header.floating-header{padding-left:30%;padding-right:30%;min-height:180px}
+.floating-header .hero-bear{width:19%;height:76%;bottom:6%;animation:bearFloat 4.8s ease-in-out infinite;will-change:transform}
+.floating-header .hero-bear.left{left:1%;--tilt:-5deg}.floating-header .hero-bear.right{right:1%;--tilt:5deg;animation-delay:-2.4s}
+.header-friend{position:absolute;width:13%;height:47%;object-fit:contain;pointer-events:none;top:9%;filter:drop-shadow(0 5px 7px #001b3d35);animation:bearFloat 5.4s ease-in-out infinite;will-change:transform}
+.header-friend.heart{left:16%;--tilt:5deg;animation-delay:-1.2s}.header-friend.hearts{right:16%;--tilt:-5deg;animation-delay:-3.5s}
+@keyframes bearFloat{0%,100%{transform:translateY(3px) rotate(var(--tilt,0deg))}50%{transform:translateY(-5px) rotate(calc(var(--tilt,0deg) + 2deg))}}
+.modal.top-prize .celebrate{position:relative;isolation:isolate}.modal.top-prize .celebrate:before{content:'';position:absolute;inset:0 4%;border-radius:50%;background:#fff;z-index:-1;box-shadow:0 0 22px 12px #fff}.modal.top-prize .winner-bear{position:relative;mix-blend-mode:normal;filter:drop-shadow(0 6px 10px #2c64941a)}
+@media(max-width:700px){header.floating-header{min-height:175px;padding-top:24px;padding-bottom:24px}.floating-header h1{font-size:clamp(18px,4.4vw,31px)}.floating-header>div{font-size:clamp(14px,3.7vw,22px)!important;letter-spacing:1px!important}.floating-header>p{letter-spacing:0!important;font-size:10px!important;white-space:normal}.floating-header .hero-bear{height:65%;bottom:8%}.header-friend{top:8%;height:38%}}
+@media(prefers-reduced-motion:reduce){.floating-header .hero-bear,.header-friend{animation:none;will-change:auto}}
+</style><style id="responsive-cards">
+html{height:auto;min-height:100%;overflow-y:auto}body{height:auto;min-height:100%;overflow:visible}
+.wrap,.wrap:has(.admin.visible){box-sizing:border-box;width:100%;max-width:900px;height:auto;min-height:0;margin:0 auto;padding:16px;gap:10px}
+header.floating-header{box-sizing:border-box;height:170px;min-height:170px;padding:18px 30%;display:flex;flex-direction:column;justify-content:center}
+header.floating-header h1{font-size:clamp(20px,4.4vw,34px);line-height:1.1;margin:6px 0;letter-spacing:0}
+header.floating-header>div{font-size:22px!important;letter-spacing:1px!important}header.floating-header>p{font-size:11px!important;line-height:1.35;margin:3px 0;letter-spacing:0!important}
+.stats{flex:none;margin:0;padding:10px 6px}.stats strong{font-size:34px;margin:0}.stats span{font-size:16px}
+.draw-guide{flex:none;margin:0;padding:10px 12px;gap:12px}.draw-guide img{width:52px;height:52px}.draw-guide h2{font-size:19px;margin:0 0 4px}.draw-guide p{font-size:13px;line-height:1.4;margin:0}
+.board,.wrap:has(.admin.visible) .board{display:grid;flex:none;grid-template-columns:repeat(5,minmax(0,1fr));grid-template-rows:none;grid-auto-rows:auto;height:auto;min-height:0;max-height:none;gap:8px;margin:0;align-content:start;align-items:stretch}
+.tile{box-sizing:border-box;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;aspect-ratio:1.85;min-width:0;min-height:58px;height:auto;max-height:none;padding:6px 3px;font-size:clamp(24px,4.5vw,36px);line-height:1;overflow:hidden;border-radius:14px}
+.tile small{display:block;flex:none;margin:0;max-width:100%;font-size:clamp(10px,1.6vw,13px);line-height:1.2;letter-spacing:0;white-space:normal;overflow-wrap:anywhere}
+.sound-controls{position:static;flex:none;padding:8px 10px;gap:8px;font-size:14px}.sound-controls .action{min-height:44px;padding:8px 14px}.sound-controls input{width:180px;min-height:44px}
+.wrap>.controls{flex:none;margin:0;gap:10px}.wrap>.controls .action{min-height:46px;font-size:17px;padding:10px 22px}#saveStatus{flex:none;margin:0;font-size:12px;line-height:1.5;text-align:center}.panel.admin{flex:none}.modal{max-height:calc(100dvh - 30px);overflow:auto}
+@media(orientation:landscape) and (min-width:1000px){.wrap,.wrap:has(.admin.visible){max-width:1500px;padding:14px 22px}.board,.wrap:has(.admin.visible) .board{grid-template-columns:repeat(10,minmax(0,1fr))}.tile{aspect-ratio:1.65;font-size:30px;min-height:64px}.tile small{font-size:12px}header.floating-header{height:160px;min-height:160px}.stats{padding:8px}.draw-guide{padding:8px 12px}}
+@media(orientation:portrait) and (min-width:1000px){.wrap,.wrap:has(.admin.visible){max-width:1400px;padding:24px;gap:16px}header.floating-header{height:290px;min-height:290px}header.floating-header h1{font-size:52px}header.floating-header>div{font-size:36px!important}header.floating-header>p{font-size:18px!important}.stats{padding:18px}.stats strong{font-size:56px}.stats span{font-size:26px}.draw-guide img{width:90px;height:90px}.draw-guide h2{font-size:32px}.draw-guide p{font-size:23px}.board,.wrap:has(.admin.visible) .board{gap:14px}.tile{font-size:52px}.tile small{font-size:21px}.sound-controls,.wrap>.controls .action,.sound-controls .action{font-size:24px}.sound-controls .action,.wrap>.controls .action{min-height:64px}#saveStatus{font-size:20px}}
+@media(max-width:480px){.wrap,.wrap:has(.admin.visible){padding:10px;gap:8px}header.floating-header>div{font-size:16px!important}header.floating-header>p{font-size:9px!important}.tile{font-size:24px;min-height:56px}.tile small{font-size:10px}.draw-guide h2{font-size:15px}.draw-guide p{font-size:11px}.draw-guide img{width:40px;height:44px}.stats span{font-size:13px}.stats strong{font-size:28px}.sound-controls input{width:110px}}
+</style><style id="portrait-spacing-tuning">
+/* Apply only to tall portrait viewports, including the 720 x 1280 preview. */
+@media (max-aspect-ratio:2/3){
+ .tile{aspect-ratio:1.65}
+ .floating-header .hero-bear{width:17%;height:70%;bottom:4%}
+ .floating-header .hero-bear.left{left:.5%}
+ .floating-header .hero-bear.right{right:.5%}
+ .floating-header .header-friend{width:11%;height:39%;top:7%}
+ .floating-header .header-friend.heart{left:18%}
+ .floating-header .header-friend.hearts{right:18%}
+}
+</style><style id="tile-width-containment">
+/* Constrain replaced aspect-ratio sizing to the grid track, even at high zoom. */
+.board,.wrap:has(.admin.visible) .board{width:100%;max-width:100%;min-width:0;box-sizing:border-box;justify-items:stretch}
+.board>.tile{width:100%;max-width:100%;min-width:0;box-sizing:border-box;justify-self:stretch;margin:0}
+.wrap,.wrap:has(.admin.visible){min-width:0;box-sizing:border-box}
+</style></head>
  <body>
   <main class="wrap">
-   <header>
+   <header class="floating-header"><img class="header-friend heart" src="images/03_heart.png" alt="하트를 안고 있는 아인사이트 곰"><img class="header-friend hearts" src="images/13_hearts.png" alt="하트와 함께 인사하는 아인사이트 곰">
 <img class="hero-bear left" src="images/01_wave.png" alt="인사하는 아인사이트 곰">
 <img class="hero-bear right" src="images/08_gift.png" alt="선물을 든 아인사이트 곰">
     <div style="font-weight:800;letter-spacing:3px;font-size:22px">
@@ -550,7 +592,7 @@ header h1{font-weight:900;letter-spacing:0;font-size:clamp(24px,5.2vw,54px)}
 <script src="audio.js?v=6-prize-pause"></script>
   <script>
    (()=>{
-  'use strict';const KEY='ainsight-lucky-50-event-v1',prizes=[{
+  'use strict';const KEY=new URLSearchParams(location.search).has('preview')?'ainsight-portrait-preview-v1':'ainsight-lucky-50-event-v1',prizes=[{
     r:1,n:'스타벅스 상품권',q:1
   },{
     r:2,n:'와인',q:2
@@ -613,7 +655,7 @@ header h1{font-weight:900;letter-spacing:0;font-size:clamp(24px,5.2vw,54px)}
     window.luckyAudio.stopWinner();
     pending=null;save();render();$('overlay').hidden=true;$('confetti').replaceChildren()
   }
-  const PINKEY='ainsight-lucky-55-event-v1-admin-pin';let adminPin='2468';try{const p=localStorage.getItem(PINKEY);if(/^\d{4}$/.test(p))adminPin=p;}catch(e){}
+  const PINKEY=new URLSearchParams(location.search).has('preview')?'ainsight-portrait-preview-pin':'ainsight-lucky-55-event-v1-admin-pin';let adminPin='2468';try{const p=localStorage.getItem(PINKEY);if(/^\d{4}$/.test(p))adminPin=p;}catch(e){}
   let dialogResolve=null,dialogMode='',digits='',returnFocus=null;
   function pinPaint(){$('pinDisplay').textContent='●'.repeat(digits.length)+'○'.repeat(4-digits.length);}
   function dismiss(value){$('touchDialog').hidden=true;const resolve=dialogResolve;dialogResolve=null;if(returnFocus&&returnFocus.focus)returnFocus.focus();if(resolve)resolve(value);}

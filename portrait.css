@@ -1,0 +1,32 @@
+/* Five columns and ten rows at every screen orientation. */
+html,body{margin:0;min-height:100%;overflow:auto}
+.wrap,.wrap:has(.admin.visible){width:100%;max-width:900px;height:max(100svh,1100px);min-height:1100px;margin:0 auto;padding:18px;gap:10px;box-sizing:border-box}
+header.floating-header{height:185px;min-height:185px;padding:24px 30%;display:flex;flex-direction:column;justify-content:center;box-sizing:border-box}
+header.floating-header h1{font-size:32px;line-height:1.1;letter-spacing:0;margin:8px 0}
+header.floating-header>div{font-size:23px!important;letter-spacing:1px!important}header.floating-header>p{font-size:12px!important;line-height:1.4;margin:3px 0;letter-spacing:0!important}
+.stats{flex:none;margin:0;padding:12px 8px}.stats strong{font-size:36px;margin:0}.stats span{font-size:17px}
+.draw-guide{flex:none;padding:10px 14px;gap:14px;margin:0}.draw-guide img{width:60px;height:60px}.draw-guide h2{font-size:20px;margin:0 0 5px}.draw-guide p{font-size:14px;line-height:1.5;margin:0}
+.board,.wrap:has(.admin.visible) .board{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));grid-template-rows:repeat(10,minmax(0,1fr));flex:1 0 550px;height:auto;min-height:550px;gap:8px;margin:0}
+.tile{min-height:0;padding:4px 2px;font-size:32px;border-radius:15px;touch-action:manipulation}.tile small{font-size:12px;margin-top:2px;line-height:1.2}
+.sound-controls{position:static;flex:none;padding:8px 12px;gap:8px;font-size:14px}.sound-controls .action{min-height:46px;padding:10px 16px}.sound-controls input{min-height:44px;width:180px}
+.wrap>.controls{flex:none;margin:0;gap:12px}.wrap>.controls .action{min-height:48px;font-size:18px;padding:10px 24px}#saveStatus{flex:none;margin:0;text-align:center;font-size:12px;line-height:1.5}
+.wrap:has(.admin.visible){height:auto}.panel.admin{flex:none}.modal{max-height:calc(100svh - 32px);overflow:auto}
+@media(orientation:portrait) and (min-width:900px){.wrap,.wrap:has(.admin.visible){max-width:none;padding:2vh 2vw;gap:1vh;height:100svh;min-height:1100px}.wrap:has(.admin.visible){height:auto}header.floating-header{height:16vh;min-height:185px}.floating-header h1{font-size:4vw!important}.floating-header>div{font-size:3vw!important}.floating-header>p{font-size:1.5vw!important}.stats{padding:1vh}.stats strong{font-size:4vw}.stats span{font-size:2vw}.draw-guide{padding:1vh 2vw}.draw-guide img{width:7vw;height:7vw}.draw-guide h2{font-size:2.6vw}.draw-guide p{font-size:1.8vw}.board,.wrap:has(.admin.visible) .board{gap:.7vh;flex-basis:42vh}.tile{font-size:4vw}.tile small{font-size:1.5vw}.sound-controls{font-size:1.8vw;padding:.7vh}.sound-controls .action,.wrap>.controls .action{font-size:2vw;min-height:4vh}.sound-controls input{width:25vw;min-height:4vh}#saveStatus{font-size:1.5vw}}
+@media(max-width:480px){.wrap,.wrap:has(.admin.visible){padding:10px;gap:8px}header.floating-header h1{font-size:20px}header.floating-header>div{font-size:17px!important}header.floating-header>p{font-size:10px!important}.draw-guide h2{font-size:15px}.draw-guide p{font-size:12px}.draw-guide img{width:44px;height:48px}.stats span{font-size:13px}.stats strong{font-size:29px}.tile{font-size:26px}.tile small{font-size:10px}.sound-controls input{width:110px}}
+/* Prevent captions from overflowing their tile, including disabled prize labels. */
+html{overflow-y:auto}body{overflow:visible}
+.board,.wrap:has(.admin.visible) .board{min-height:720px;flex-basis:720px;grid-template-rows:repeat(10,minmax(64px,1fr))}
+.tile{box-sizing:border-box;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;line-height:1.05;min-height:64px;height:100%;overflow:hidden}
+.tile small{display:block;flex:none;margin:0;max-width:100%;line-height:1.25;letter-spacing:0;white-space:normal;overflow-wrap:anywhere}
+@media(orientation:landscape) and (min-width:900px){
+ .wrap,.wrap:has(.admin.visible){max-width:1600px;width:100%;height:max(100svh,820px);min-height:820px;padding:12px 22px;gap:10px}
+ .wrap:has(.admin.visible){height:auto}
+ header.floating-header{height:150px;min-height:150px;padding:14px 30%}
+ header.floating-header h1{font-size:32px;margin:5px 0}
+ .stats{padding:8px}.stats strong{font-size:32px}.stats span{font-size:15px}
+ .draw-guide{padding:7px 14px}.draw-guide img{width:48px;height:48px}.draw-guide h2{font-size:18px}.draw-guide p{font-size:13px}
+ .board,.wrap:has(.admin.visible) .board{grid-template-columns:repeat(10,minmax(0,1fr));grid-template-rows:repeat(5,minmax(66px,1fr));min-height:362px;flex:1 0 362px;height:auto;gap:8px}
+ .tile{font-size:30px;min-height:66px;padding:6px 3px}.tile small{font-size:12px}
+ .sound-controls{padding:6px 12px}.sound-controls .action,.wrap>.controls .action{min-height:44px;font-size:16px;padding:8px 18px}
+}
+@media(orientation:portrait) and (min-width:900px){.board,.wrap:has(.admin.visible) .board{min-height:720px;flex-basis:42vh;grid-template-rows:repeat(10,minmax(64px,1fr))}}
